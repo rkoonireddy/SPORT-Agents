@@ -1,104 +1,84 @@
-# SPORT Agent
+# 🎯 SPORT: Iterative Trajectory Exploration for Multimodal Agents
 
-SPORT Agent is a comprehensive system for automated generation and verification of query-image pairs and trajectory samplings, designed to support the development of VLM agents. The system implements a robust pipeline to create and validate high-quality task-specific data. It features a modular architecture with components for data generation, verification, and trajectory sampling, supporting the entire workflow from query generation to DPO training and evaluation.
+<div align="center">
 
-## Project Structure
+[![arXiv](https://img.shields.io/badge/arXiv-2504.21561-b31b1b.svg)](https://arxiv.org/abs/2504.21561)
+[![Project Page](https://img.shields.io/badge/Project-Page-2ea44f)](https://sport-agents.github.io)
+[![Paper](https://img.shields.io/badge/Paper-PDF-red)](https://arxiv.org/pdf/2504.21561)
+
+</div>
+
+SPORT introduces an online self-exploration loop that enables multimodal agents to self-improve via AI-generated tasks and LLM-verified preference tuning without human annotations.
+
+## 📋 Key Features
+
+- **Task Synthesis**: Automatically generates multimodal tasks using language models
+- **Step Sampling**: Proposes and executes multiple candidate actions at each decision point
+- **Step Verification**: Uses LLM as a critic to compare and rank action outcomes
+- **Preference Tuning**: Updates agent policy through preference-based optimization
+
+## 🎯 Results
+
+### GTA Benchmark Performance
+
+Our SPORT Agent demonstrates significant improvements over baseline models:
+
+- **+7%** in Answer Accuracy (AnsAcc)
+- **+8%** in Tool Accuracy (ToolAcc)
+- **+7%** in Code Execution Success (CodeExec)
+
+![GTA Results](assets/gta_result.png)
+
+## 📋 Project Structure
 
 The project consists of several main components:
-- `data_generation/`: Contains the data generation pipeline
-- `closed_loop_verifier/`: Verification and validation tools
-- `tongagent/`: Core agent implementation
-- `script/`: Utility scripts
+- 📊 `data_generation/`: Contains the data generation pipeline
+- ✅ `closed_loop_verifier/`: Verification and validation tools
+- 🤖 `tongagent/`: Core agent implementation
+- 🔧 `script/`: Utility scripts
 
-## Installation
+## 🚀 Quick Start
 
+### Installation
 ```bash
 pip install -r requirements.txt
 ```
 
-## Environment Setup
-
+### Environment Setup
 The project uses environment variables for configuration. Make sure to set up your `.env` file and `configs/agent_config.yaml` with the necessary credentials and settings.
 
+## 📥 Data Preparation
 
-## Preparing Images and embeddings
+### Images and Embeddings
 The image captions and caption embeddings can be downloaded via the following link:
-[Google Drive](https://drive.google.com/drive/folders/1Ek6qfmhcaTd7zTEQcBvELh6i7unVhTrk?usp=sharing).
+[📦 Google Drive](https://drive.google.com/drive/folders/1Ek6qfmhcaTd7zTEQcBvELh6i7unVhTrk?usp=sharing)
+
 Please download the images and embeddings and put them in 'data_generation/sharegpt4v'.
 
-Please follow [ShareGPT4V](https://sharegpt4v.github.io/) to organize the image source in 'data_generation/sharegpt4v' as follows:
-```none
+## 📝 Citation
 
-├── ...
-├── data
-│   ├── llava
-│   │   ├── llava_pretrain
-│   │   │   ├── images
-│   ├── coco
-│   │   ├── train2017
-│   ├── sam
-│   │   ├── images
-│   ├── web-celebrity
-│   │   ├── images
-│   ├── web-landmark
-│   │   ├── images
-│   ├── wikiart
-│   ├── share_textvqa
-│   │   ├── images
-│   ├── chatqa
-│   │   ├── train
-│   │   │   ├── png
-
-```
-## Data Generation Pipeline
-
-The data generation process follows a sequential pipeline:
-
-### 1. Query Generation
-```bash
-python data_generation/gta_pipeline/gta0_query_generation.py
-```
-Generates initial queries for the task.
-
-### 2. Image Content Generation
-```bash
-python data_generation/gta_pipeline/gta1_query2image_content_parallel.py
-```
-Processes the queries to generate corresponding image content descriptions.
-
-### 3. Image Retrieval
-```bash
-python data_generation/gta_pipeline/gta2_image_content2image_file.py
-```
-Retrieves actual images based on the generated content descriptions. The images are saved at `data/tongagent`.
-
-### 4. Quality Filtering
-```bash
-python data_generation/gta_pipeline/gta3_q_f_filter_parallel.py
-```
-Performs quality checks and filtering on the query-image pairs.
-
-
-## Trajectory Sampling
-
-```bash
-bash script/trajectory_sampling.sh
-```
-## Data Formatting
-
-```bash
-python data_generation/dpo_gta_traj/data_reformat/data_formating.py
+If you find this work useful, please cite our paper:
+```bibtex
+@inproceedings{li2025iterative,
+  title={Iterative Trajectory Exploration for Multimodal Agents}, 
+  author={Li, Pengxiang and Gao, Zhi and Zhang, Bofei and Mi, Yapeng and Ma, Xiaojian and Shi, Chenrui and Yuan, Tao and Wu, Yuwei and Jia, Yunde and Zhu, Song-Chun and Li, Qing},
+  year={2025},
+  eprint={2504.21561},
+  archivePrefix={arXiv},
+  url={https://arxiv.org/abs/2504.21561}, 
+}
 ```
 
-## DPO Training 
+## 🤝 Contributing
 
-Please refer to the llama-factory [repo](https://github.com/hiyouga/LLaMA-Factory) for DPO training.
+We welcome contributions! Please feel free to submit a Pull Request.
 
-## Evaluation
+## 📄 License
 
-Download the gta dataset via [Huggingface](https://huggingface.co/datasets/Jize1/GTA) and put it in `data/gta_dataset`.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-run the following command to evaluate the model:
-```bash
-bash script/gta_evaulation.sh
-```
+---
+
+<div align="center">
+  <img src="https://api.star-history.com/svg?repos=SPORT-Agents/SPORT-Agents&type=Date" alt="Star History Chart" />
+</div>
