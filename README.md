@@ -40,6 +40,12 @@ The project consists of several main components:
 ## 🚀 Quick Start
 
 ### Installation
+
+Generally run 
+```bash
+sh setup.sh
+```
+else i.e. Linux directly, then run
 ```bash
 pip install -r requirements.txt
 ```
